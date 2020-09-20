@@ -12,7 +12,7 @@ public class SelectDemo {
         System.out.println("Podaj literę:");
         String letter = scanner.next();
         Statement find = connection.createStatement();
-        ResultSet resultSet = find.executeQuery("select * from demo where name LIKE 'A%'");
+        ResultSet resultSet = find.executeQuery("select * from demo where name LIKE '" + letter + "%'");
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
             System.out.println(", name: " + resultSet.getString("name"));
