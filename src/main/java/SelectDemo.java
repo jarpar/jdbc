@@ -10,9 +10,12 @@ public class SelectDemo {
         Connection connection = ConnectionDemo.getConnection();
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj literę:");
-        String letter = scanner.next();
+        String letter = scanner.nextLine();
         Statement find = connection.createStatement();
-        ResultSet resultSet = find.executeQuery("select * from demo where name LIKE '" + letter + "%'");
+        //ResultSet resultSet = find.executeQuery("select * from demo where name LIKE '" + letter + "%'");
+        // % jako letter zwróci wszystkie pozycje
+        ResultSet resultSet = find.executeQuery("select * from demo where id =" + letter);
+        // 1 or 1=1 zwróci wszystkie id, tzw. SQL injection
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
             System.out.println(", name: " + resultSet.getString("name"));
