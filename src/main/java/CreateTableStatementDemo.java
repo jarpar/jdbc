@@ -7,6 +7,7 @@ public class CreateTableStatementDemo {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, SQLException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
         Connection connection = ConnectionDemo.getConnection();
         Statement createTable = connection.createStatement();
+        createTable.execute("drop table if exists demo");
         boolean execute = createTable.execute("create table if not exists demo(id integer primary key, name varchar(20))");
         System.out.println("Wartość zwrócona przez polecenie: " + execute);
 
