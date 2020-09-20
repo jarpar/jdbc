@@ -23,7 +23,9 @@ public class SelectDemo {
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
             System.out.print(", name: " + resultSet.getString("name"));
-            System.out.println(", points: " + resultSet.getInt("points"));
+            int points = resultSet.getInt("points");
+            boolean isPointsWasNull = resultSet.wasNull();
+            System.out.println(", points: " + (isPointsWasNull ? "NULL" : points));
         }
         connection.close();
     }
