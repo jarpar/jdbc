@@ -25,7 +25,7 @@ public class SelectDemo {
             System.out.print(", name: " + resultSet.getString("name"));
             int points = resultSet.getInt("points");
             boolean isPointsWasNull = resultSet.wasNull();
-            System.out.println(", points: " + (isPointsWasNull ? "NULL" : points));
+            System.out.println(", points: " + (isPointsWasNull ? "null" : points));
         }
         connection.close();
     }
