@@ -24,5 +24,9 @@ public class UpdateAndInsertDemo {
                 records.updateRow();
             }
         }
+
+        records = selectAll.executeQuery("select * from demo");
+        System.out.println("Zaktualizowana baza:");
+        SelectDemo.printDemoTable(records);
     }
 }
