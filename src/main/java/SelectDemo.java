@@ -13,9 +13,12 @@ public class SelectDemo {
         // % jako letter zwróci wszystkie pozycje
         //ResultSet resultSet = find.executeQuery("select * from demo where id =" + letter);
         // 1 or 1=1 zwróci wszystkie id, tzw. SQL injection
-        PreparedStatement find = connection.prepareStatement("select * from demo id ?");
+
+        //zapytanie zabezpieczone przed SQL injection:
+        PreparedStatement find = connection.prepareStatement("select * from demo where id = ?");
+        // wstawianie wartości parametru w miejscu pierwszego pytajnika:
         find.setInt(1, Integer.parseInt(letter));
-        find.executeQuery();
+        ResultSet resultSet = find.executeQuery();
 
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
