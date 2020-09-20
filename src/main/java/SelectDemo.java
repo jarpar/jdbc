@@ -6,7 +6,7 @@ public class SelectDemo {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, SQLException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
         Connection connection = ConnectionDemo.getConnection();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj literę:");
+        System.out.println("Podaj numer id:");
         String letter = scanner.nextLine();
         //Statement find = connection.createStatement();
         //ResultSet resultSet = find.executeQuery("select * from demo where name LIKE '" + letter + "%'");
@@ -22,7 +22,8 @@ public class SelectDemo {
 
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
-            System.out.println(", name: " + resultSet.getString("name"));
+            System.out.print(", name: " + resultSet.getString("name"));
+            System.out.println(", points: " + resultSet.getInt("points"));
         }
         connection.close();
     }
