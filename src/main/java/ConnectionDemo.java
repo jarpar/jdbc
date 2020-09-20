@@ -2,12 +2,21 @@ import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public class ConnectionDemo {
     public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
-        Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/zajecia3?serverTimezone=Europe/Warsaw", "root", "root");
+        Connection connection = getConnection();
         connection.close();
     }
+
+    public static Connection getConnection() throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException, SQLException {
+        Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
+        Connection connection = DriverManager
+                .getConnection("jdbc:mysql://localhost:3306/zajecia3?serverTimezone=Europe/Warsaw",
+                        "root",
+                        "root");
+        return connection;
+    }
+
 }
