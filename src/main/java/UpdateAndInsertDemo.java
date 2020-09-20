@@ -23,6 +23,14 @@ public class UpdateAndInsertDemo {
                 records.updateInt("points", 0);
                 records.updateRow();
             }
+            // jeżeli w polu name jest null to wstawiamy nowy rekord
+            if (records.getString("name") == null) {
+                records.moveToInsertRow();
+                records.updateInt("id", 7);
+                records.updateString("name","nowy");
+                records.updateInt("points",10);
+                records.insertRow();
+            }
         }
 
         records = selectAll.executeQuery("select * from demo");
