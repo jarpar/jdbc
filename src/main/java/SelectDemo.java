@@ -1,8 +1,5 @@
 import java.lang.reflect.InvocationTargetException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Scanner;
 
 public class SelectDemo {
@@ -11,11 +8,15 @@ public class SelectDemo {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Podaj literę:");
         String letter = scanner.nextLine();
-        Statement find = connection.createStatement();
+        //Statement find = connection.createStatement();
         //ResultSet resultSet = find.executeQuery("select * from demo where name LIKE '" + letter + "%'");
         // % jako letter zwróci wszystkie pozycje
-        ResultSet resultSet = find.executeQuery("select * from demo where id =" + letter);
+        //ResultSet resultSet = find.executeQuery("select * from demo where id =" + letter);
         // 1 or 1=1 zwróci wszystkie id, tzw. SQL injection
+        PreparedStatement find = connection.prepareStatement("select * from demo id ?");
+        find.setInt(1, Integer.parseInt(letter));
+        find.executeQuery();
+
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
             System.out.println(", name: " + resultSet.getString("name"));
