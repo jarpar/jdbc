@@ -20,6 +20,11 @@ public class SelectDemo {
         find.setInt(1, Integer.parseInt(letter));
         ResultSet resultSet = find.executeQuery();
 
+        printDemoTable(resultSet);
+        connection.close();
+    }
+
+    public static void printDemoTable(ResultSet resultSet) throws SQLException {
         while (resultSet.next()) {
             System.out.print("id: " + resultSet.getInt("id"));
             System.out.print(", name: " + resultSet.getString("name"));
@@ -27,6 +32,5 @@ public class SelectDemo {
             boolean isPointsWasNull = resultSet.wasNull();
             System.out.println(", points: " + (isPointsWasNull ? "null" : points));
         }
-        connection.close();
     }
 }

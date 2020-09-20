@@ -13,13 +13,13 @@ public class ScrollResultSetdemo {
                 ResultSet.CONCUR_READ_ONLY
         );
         ResultSet records = selectAll.executeQuery("select * from demo");
-
-        while (records.next()) {
+        SelectDemo.printDemoTable(records);
+        /*while (records.next()) {
             System.out.print("id: " + records.getInt("id"));
             System.out.print(", name: " + records.getString("name"));
             int points = records.getInt("points");
             boolean isPointsWasNull = records.wasNull();
             System.out.println(", points: " + (isPointsWasNull ? "null" : points));
-        }
+        }*/
     }
 }
