@@ -11,10 +11,10 @@ public class CreateTableStatementDemo {
         boolean execute = createTable.execute("create table if not exists demo(id integer primary key, name varchar(20))");
         int rows = createTable.executeUpdate("insert into demo values" +
                 "(1,'ALA')," +
-                "(2,'BEATA')," +
-                "(3,'CZESLAW')," +
-                "(4,'DARIUSZ')," +
-                "(5,'EUGENIUSZ')"
+                "(2,'ADAM')," +
+                "(3,'BARTOSZ')," +
+                "(4,'BOGUMIŁ')," +
+                "(5,'CELINA')"
         );
         System.out.println("Wartość zwrócona przez polecenie: " + execute);
         System.out.println("Dodano wierszy " + rows);
