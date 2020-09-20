@@ -11,7 +11,12 @@ public class UpdateAndInsertDemo {
                 ResultSet.TYPE_SCROLL_SENSITIVE,
                 ResultSet.CONCUR_UPDATABLE
         );
+
         ResultSet records = selectAll.executeQuery("select * from demo");
+
+        SelectDemo.printDemoTable(records);
+        records.beforeFirst();
+
         while ((records.next())) {
             int points = records.getInt("points");
             if (records.wasNull()) {
