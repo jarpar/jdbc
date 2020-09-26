@@ -1,9 +1,15 @@
 package entity;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,5 +35,6 @@ public class Question implements Serializable {
 
     @Column(nullable = false)
     private int points;
+
 
 }
