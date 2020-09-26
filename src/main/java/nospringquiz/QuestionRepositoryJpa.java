@@ -35,11 +35,24 @@ public class QuestionRepositoryJpa implements QuestionRepository {
 
     @Override
     public void delete(Question question) {
-
+        EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
+        em.remove(question);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
     public void update(long id, Question question) {
+        EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
+        Question entity = em.find(Question.class, id);
+        if (entity == null) {
+            em.close();
+            return;
+        }
+//        em.getTransaction().commit();
+//        em.close();
 
     }
 
