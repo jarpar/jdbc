@@ -8,7 +8,7 @@ import java.util.List;
 
 public class EntityManagerDemo {
     public static void main(String[] args) {
-        EntityManager em = MyPersistence.JAVA5.getEntityManager();
+        EntityManager em = MyPersistence.QUIZ.getEntityManager();
         Demo demo = em.find(Demo.class, 1);
         System.out.println(demo);
 

@@ -41,6 +41,7 @@ public class QuizApp {
 
     public static void main(String[] args) {
         QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
-
+        //initData(questionRepository);
+        questionRepository.findAll().forEach(System.out::println);
     }
 }
