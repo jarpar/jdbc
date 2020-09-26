@@ -28,4 +28,12 @@ public class QuizController {
     public void saveAnswer(Question question, int answer) {
         answers.put(question, answer);
     }
+
+    public int summary() {
+        return answers.entrySet()
+                .stream()
+                .filter(entry -> entry.getKey().getValidOption() == entry.getValue())
+                .mapToInt(entry -> entry.getKey().getPoints())
+                .sum();
+    }
 }
