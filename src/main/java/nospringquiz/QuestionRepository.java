@@ -14,4 +14,5 @@ public interface QuestionRepository {
     void update(long id, Question question);
 
     List<Question> findAll();
+
 }
