@@ -64,6 +64,7 @@ public class QuestionRepositoryJpa implements QuestionRepository {
 
     @Override
     public List<Question> findAll() {
-        return null;
+        EntityManager em = persistence.getEntityManager();
+        return em.createQuery("from Question", Question.class).getResultList();
     }
 }
