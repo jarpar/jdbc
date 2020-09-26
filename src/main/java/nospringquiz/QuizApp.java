@@ -50,7 +50,7 @@ public class QuizApp {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             Question question = controller.next();
-            System.out.printf(question.getBody());
+            System.out.println(question.getBody());
             System.out.println("1. " + question.getOption1());
             System.out.println("2. " + question.getOption2());
             System.out.println("3. " + question.getOption3());

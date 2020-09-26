@@ -25,6 +25,13 @@ public class QuizController {
         return currentQuestion;
     }
 
+    public Question previous() {
+        if (questions.hasPrevious()) {
+            currentQuestion = questions.previous();
+        }
+        return currentQuestion;
+    }
+
     public void saveAnswer(Question question, int answer) {
         answers.put(question, answer);
     }
@@ -35,8 +42,5 @@ public class QuizController {
                 .filter(entry -> entry.getKey().getValidOption() == entry.getValue())
                 .mapToInt(entry -> entry.getKey().getPoints())
                 .sum();
-    }
-
-    public void previous() {
     }
 }
