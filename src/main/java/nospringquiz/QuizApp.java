@@ -43,7 +43,8 @@ public class QuizApp {
 
     public static void main(String[] args) {
         QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
-        //initData(questionRepository);
+        // uncomment lines for first run:
+        // initData(questionRepository);
         //questionRepository.findAll().forEach(System.out::println);
         QuizService quizService = new QuizServiceJpa(questionRepository);
         QuizController controller = new QuizController(quizService);
