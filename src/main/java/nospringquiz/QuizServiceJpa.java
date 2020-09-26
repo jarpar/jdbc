@@ -13,6 +13,6 @@ public class QuizServiceJpa implements QuizService {
 
     @Override
     public List<Question> getQuiz(long id) {
-        return null;
+        return questionRepository.findAll();
     }
 }
