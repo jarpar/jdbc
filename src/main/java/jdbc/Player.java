@@ -1,3 +1,4 @@
+package jdbc;
 
 public class Player {
     private int id;
