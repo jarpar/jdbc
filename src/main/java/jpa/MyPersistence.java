@@ -1,5 +1,6 @@
 package jpa;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -10,5 +11,9 @@ public enum MyPersistence {
 
     MyPersistence(String peristenceUnit) {
         this.factory = Persistence.createEntityManagerFactory(peristenceUnit);
+    }
+
+    public EntityManager getEntityManager() {
+        return factory.createEntityManager();
     }
 }
