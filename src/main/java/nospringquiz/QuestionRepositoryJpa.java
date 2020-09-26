@@ -3,7 +3,9 @@ package nospringquiz;
 import entity.Question;
 import jpa.MyPersistence;
 
+import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 public class QuestionRepositoryJpa implements QuestionRepository {
 
@@ -16,12 +18,19 @@ public class QuestionRepositoryJpa implements QuestionRepository {
 
     @Override
     public void save(Question question) {
-
+        EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(question);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public Question findByID(long id) {
-        return null;
+    public Optional<Question> findByID(long id) {
+        EntityManager em = persistence.getEntityManager();
+        Optional<Question> question = Optional.ofNullable(em.find(Question.class, id));
+        em.close();
+        return question;
     }
 
     @Override

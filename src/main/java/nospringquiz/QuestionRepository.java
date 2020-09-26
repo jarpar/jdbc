@@ -3,11 +3,12 @@ package nospringquiz;
 import entity.Question;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface QuestionRepository {
     void save(Question question);
 
-    Question findByID(long id);
+    Optional<Question> findByID(long id);
 
     void delete(Question question);
 
