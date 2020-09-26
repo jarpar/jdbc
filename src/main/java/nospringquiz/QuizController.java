@@ -24,4 +24,8 @@ public class QuizController {
         }
         return currentQuestion;
     }
+
+    public void saveAnswer(Question question, int answer) {
+        answers.put(question, answer);
+    }
 }
