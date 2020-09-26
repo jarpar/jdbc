@@ -55,12 +55,16 @@ public class QuizApp {
             System.out.println("2. " + question.getOption2());
             System.out.println("3. " + question.getOption3());
             System.out.println("4. " + question.getOption4());
-            System.out.printf("0. Cofnij się do poprzedniego pytania");
+            System.out.println("0. Cofnij się do poprzedniego pytania");
+            System.out.println("5. Koniec");
             int answer = scanner.nextInt();
             if (answer == 0) {
                 controller.previous();
                 controller.previous();
                 continue;
+            }
+            if (answer == 5) {
+                break;
             }
             controller.saveAnswer(question, answer);
         }
