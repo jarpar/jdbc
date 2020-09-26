@@ -48,11 +48,11 @@ public class QuestionRepositoryJpa implements QuestionRepository {
         em.getTransaction().begin();
         Question entity = em.find(Question.class, id);
         if (entity == null) {
+            em.getTransaction().commit();
             em.close();
             return;
         }
-//        em.getTransaction().commit();
-//        em.close();
+
 
     }
 
