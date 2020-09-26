@@ -36,4 +36,7 @@ public class QuizController {
                 .mapToInt(entry -> entry.getKey().getPoints())
                 .sum();
     }
+
+    public void previous() {
+    }
 }

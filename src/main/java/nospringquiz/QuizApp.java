@@ -3,6 +3,8 @@ package nospringquiz;
 import entity.Question;
 import jpa.MyPersistence;
 
+import java.util.Scanner;
+
 public class QuizApp {
     public static void initData(QuestionRepository repository) {
         Question q = Question.builder()
@@ -42,6 +44,25 @@ public class QuizApp {
     public static void main(String[] args) {
         QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
         //initData(questionRepository);
-        questionRepository.findAll().forEach(System.out::println);
+        //questionRepository.findAll().forEach(System.out::println);
+        QuizService quizService = new QuizServiceJpa(questionRepository);
+        QuizController controller = new QuizController(quizService);
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            Question question = controller.next();
+            System.out.printf(question.getBody());
+            System.out.println("1. " + question.getOption1());
+            System.out.println("2. " + question.getOption2());
+            System.out.println("3. " + question.getOption3());
+            System.out.println("4. " + question.getOption4());
+            System.out.printf("0. Cofnij się do poprzedniego pytania");
+            int answer = scanner.nextInt();
+            if (answer == 0) {
+                controller.previous();
+                controller.previous();
+                continue;
+            }
+            controller.saveAnswer(question, answer);
+        }
     }
 }
