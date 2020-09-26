@@ -1,3 +1,4 @@
+
 public class Player {
     private int id;
     private String name;
@@ -31,5 +32,14 @@ public class Player {
 
     public void setPoints(int points) {
         this.points = points;
+    }
+
+    @Override
+    public String toString() {
+        return "day1.Player{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", points=" + points +
+                '}';
     }
 }
