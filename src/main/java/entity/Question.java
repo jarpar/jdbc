@@ -23,10 +23,10 @@ public class Question {
     @Column(nullable = false)
     private String option4;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private int validOption;
 
-    @Column(nullable = true)
+    @Column(nullable = false)
     private int points;
 
 }
