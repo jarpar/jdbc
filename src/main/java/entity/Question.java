@@ -1,14 +1,15 @@
 package entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
-public class Question {
+public class Question implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String body;
 
     @Column(nullable = false)

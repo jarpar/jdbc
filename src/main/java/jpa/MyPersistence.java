@@ -9,8 +9,8 @@ public enum MyPersistence {
 
     private final EntityManagerFactory factory;
 
-    MyPersistence(String peristenceUnit) {
-        this.factory = Persistence.createEntityManagerFactory(peristenceUnit);
+    MyPersistence(String persistenceUnit) {
+        this.factory = Persistence.createEntityManagerFactory(persistenceUnit);
     }
 
     public EntityManager getEntityManager() {
