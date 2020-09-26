@@ -1,6 +1,7 @@
 package nospringquiz;
 
 import entity.Question;
+import jpa.MyPersistence;
 
 public class QuizApp {
     public static void initData(QuestionRepository repository) {
@@ -39,6 +40,7 @@ public class QuizApp {
     }
 
     public static void main(String[] args) {
+        QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
 
     }
 }
