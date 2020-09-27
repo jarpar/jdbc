@@ -1,5 +1,6 @@
 package springquiz;
 
+import entity.Quiz;
 import entity.Question;
 import nospringquiz.QuizController;
 import nospringquiz.QuizService;
