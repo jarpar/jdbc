@@ -38,7 +38,7 @@ public class QuizApp {
                 .body("Wybierz wyrażenie, które jest fałszem")
                 .options(Option.builder()
                         .option1("10 > 5 && true")
-                        .option2("a\".equals(\"a\")")
+                        .option2("\"a\".equals(\"a\")")
                         .option3("true == false")
                         .option4("10 != 4")
                         .build())
@@ -51,7 +51,7 @@ public class QuizApp {
     public static void main(String[] args) {
         QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
         // uncomment lines for first run:
-        // initData(questionRepository);
+        //initData(questionRepository);
         //questionRepository.findAll().forEach(System.out::println);
         QuizService quizService = new QuizServiceJpa(questionRepository);
         QuizController controller = new QuizController(quizService);
