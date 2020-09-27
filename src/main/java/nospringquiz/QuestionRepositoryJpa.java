@@ -28,7 +28,9 @@ public class QuestionRepositoryJpa implements QuestionRepository {
     @Override
     public Optional<Question> findByID(long id) {
         EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
         Optional<Question> question = Optional.ofNullable(em.find(Question.class, id));
+        em.getTransaction().commit();
         em.close();
         return question;
     }

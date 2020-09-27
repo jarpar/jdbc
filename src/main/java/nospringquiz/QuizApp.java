@@ -2,12 +2,16 @@ package nospringquiz;
 
 import entity.Option;
 import entity.Question;
+import entity.Quiz;
 import jpa.MyPersistence;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class QuizApp {
-    public static void initData(QuestionRepository repository) {
+    public static void initData(QuestionRepository repository, QuizRepository quizRepository) {
+        Set<Question> questions = new HashSet<>();
         Question q = Question.builder()
                 .body("Wybierz słowo kluczowe Javy")
                 .options(Option.builder()
@@ -19,6 +23,7 @@ public class QuizApp {
                 .validOption(3)
                 .points(5)
                 .build();
+        questions.add(q);
         repository.save(q);
 
         q = Question.builder()
@@ -32,6 +37,7 @@ public class QuizApp {
                 .validOption(4)
                 .points(5)
                 .build();
+        questions.add(q);
         repository.save(q);
 
         q = Question.builder()
@@ -45,16 +51,23 @@ public class QuizApp {
                 .validOption(3)
                 .points(5)
                 .build();
+        questions.add(q);
         repository.save(q);
+
+        Quiz quiz = Quiz.builder().title("Język Java").questions(questions).build();
+        quizRepository.save(quiz);
+
     }
 
     public static void main(String[] args) {
         QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
+        QuizRepository quizRepository = new QuizRepositoryJpa(MyPersistence.QUIZ);
         // uncomment lines for first run:
-        //initData(questionRepository);
         //questionRepository.findAll().forEach(System.out::println);
-        QuizService quizService = new QuizServiceJpa(questionRepository);
+        initData(questionRepository, quizRepository);
+        QuizService quizService = new QuizServiceJpa(quizRepository);
         QuizController controller = new QuizController(quizService);
+
         Scanner scanner = new Scanner(System.in);
         while (true) {
             Question question = controller.next();

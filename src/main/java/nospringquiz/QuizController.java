@@ -14,7 +14,7 @@ public class QuizController {
 
     public QuizController(QuizService quizService) {
         this.quizService = quizService;
-        questions = quizService.getQuiz(0).listIterator();
+        questions = quizService.getQuiz(1).listIterator();//todo
     }
 
     public Question next() {

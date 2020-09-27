@@ -21,7 +21,7 @@ public class Quiz {
 
     private String title;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private Set<Question> questions;
 
 }
