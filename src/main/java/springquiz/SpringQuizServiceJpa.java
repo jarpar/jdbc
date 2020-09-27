@@ -12,18 +12,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class QuizServiceJpa implements QuizService {
+public class SpringQuizServiceJpa implements QuizService {
 
-    private final QuizRepository quizRepository;
+    private final SpringQuizRepository springQuizRepository;
 
     @Autowired
-    public QuizServiceJpa(QuizRepository quizRepository) {
-        this.quizRepository = quizRepository;
+    public SpringQuizServiceJpa(SpringQuizRepository springQuizRepository) {
+        this.springQuizRepository = springQuizRepository;
     }
 
     @Override
     public List<Question> getQuiz(long id) {
-        Optional<Quiz> quiz = quizRepository.findById(id);
+        Optional<Quiz> quiz = springQuizRepository.findById(id);
         if (quiz.isPresent()) {
             return new ArrayList<>(quiz.get().getQuestions());
         }
