@@ -1,33 +1,65 @@
 package nospringquiz;
 
-import entity.Question;
+import entity.Quiz;
+import jpa.MyPersistence;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 import java.util.Optional;
 
-public class QuizRepositoryJpa implements QuestionRepository {
-    @Override
-    public void save(Question question) {
+public class QuizRepositoryJpa implements QuizRepository {
 
+    private final MyPersistence persistence;
+
+    public QuizRepositoryJpa(MyPersistence persistence) {
+        this.persistence = persistence;
     }
 
     @Override
-    public Optional<Question> findByID(long id) {
-        return Optional.empty();
+    public void save(Quiz quiz) {
+        EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
+        em.persist(quiz);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public void delete(Question question) {
-
+    public Optional<Quiz> findByID(long id) {
+        EntityManager em = persistence.getEntityManager();
+        Optional<Quiz> quiz = Optional.ofNullable(em.find(Quiz.class, id));
+        em.close();
+        return quiz;
     }
 
     @Override
-    public void update(long id, Question question) {
-
+    public void delete(Quiz quiz) {
+        EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
+        em.remove(quiz);
+        em.getTransaction().commit();
+        em.close();
     }
 
     @Override
-    public List<Question> findAll() {
-        return null;
+    public void update(long id, Quiz quiz) {
+        EntityManager em = persistence.getEntityManager();
+        em.getTransaction().begin();
+        Quiz entity = em.find(Quiz.class, id);
+        if (entity == null) {
+            em.getTransaction().commit();
+            em.close();
+            return;
+        }
+        entity.setQuestions(quiz.getQuestions());
+        entity.setTitle(quiz.getTitle());
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Override
+    public List<Quiz> findAll() {
+        EntityManager em = persistence.getEntityManager();
+        return em.createQuery("from Quiz", Quiz.class).getResultList();
     }
 }

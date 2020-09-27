@@ -59,6 +59,7 @@ public class QuestionRepositoryJpa implements QuestionRepository {
 //        entity.setOption4(question.getOption4());
         entity.setValidOption(question.getValidOption());
         entity.setPoints(question.getPoints());
+        em.getTransaction().commit();
         em.close();
     }
 
