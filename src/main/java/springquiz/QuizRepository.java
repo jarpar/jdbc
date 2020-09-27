@@ -1,10 +1,10 @@
 package springquiz;
 
-import entity.Question;
+import entity.Quiz;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+public interface QuizRepository extends JpaRepository<Quiz, Long> {
 
 }
