@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class QuizApp {
-    public static void initData(QuestionRepository repository, QuizRepository quizRepository) {
+    public static void initData(QuestionRepository repository, QuizRepository quizRepository){
         Set<Question> questions = new HashSet<>();
         Question q = Question.builder()
                 .body("Wybierz słowo kluczowe Javy")
@@ -25,9 +25,8 @@ public class QuizApp {
                 .build();
         questions.add(q);
         repository.save(q);
-
         q = Question.builder()
-                .body("Wybierz instrukcję przyrywającą iterację")
+                .body("Wskaż instrukcję przerywającą iteracje.")
                 .options(Option.builder()
                         .option1("switch")
                         .option2("return")
@@ -39,9 +38,8 @@ public class QuizApp {
                 .build();
         questions.add(q);
         repository.save(q);
-
         q = Question.builder()
-                .body("Wybierz wyrażenie, które jest fałszem")
+                .body("Które wyrażenie jest fałszem")
                 .options(Option.builder()
                         .option1("10 > 5 && true")
                         .option2("\"a\".equals(\"a\")")
@@ -56,20 +54,15 @@ public class QuizApp {
 
         Quiz quiz = Quiz.builder().title("Język Java").questions(questions).build();
         quizRepository.save(quiz);
-
     }
-
     public static void main(String[] args) {
         QuestionRepository questionRepository = new QuestionRepositoryJpa(MyPersistence.QUIZ);
         QuizRepository quizRepository = new QuizRepositoryJpa(MyPersistence.QUIZ);
-        // uncomment lines for first run:
-        //questionRepository.findAll().forEach(System.out::println);
         initData(questionRepository, quizRepository);
         QuizService quizService = new QuizServiceJpa(quizRepository);
-        QuizController controller = new QuizController(quizService);
-
+        QuizController controller = new QuizController(quizService, 1);
         Scanner scanner = new Scanner(System.in);
-        while (true) {
+        while(true){
             Question question = controller.next();
             System.out.println(question.getBody());
             System.out.println("1. " + question.getOptions().getOption1());
@@ -79,15 +72,16 @@ public class QuizApp {
             System.out.println("0. Cofnij się do poprzedniego pytania");
             System.out.println("5. Koniec");
             int answer = scanner.nextInt();
-            if (answer == 0) {
+            if (answer == 0){
                 controller.previous();
                 controller.previous();
                 continue;
             }
-            if (answer == 5) {
+            if (answer == 5){
                 break;
             }
             controller.saveAnswer(question, answer);
         }
+        System.out.println("Podsumowanie quizu: " + controller.summary());
     }
 }

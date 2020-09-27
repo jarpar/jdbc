@@ -7,13 +7,8 @@ import java.util.Optional;
 
 public interface QuestionRepository {
     void save(Question question);
-
-    Optional<Question> findByID(long id);
-
+    Optional<Question> findById(long id);
     void delete(Question question);
-
     void update(long id, Question question);
-
     List<Question> findAll();
-
 }

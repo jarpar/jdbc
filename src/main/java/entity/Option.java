@@ -16,14 +16,10 @@ import javax.persistence.Embeddable;
 public class Option {
     @Column(nullable = false)
     private String option1;
-
     @Column(nullable = false)
     private String option2;
-
     @Column(nullable = false)
     private String option3;
-
     @Column(nullable = false)
     private String option4;
-
 }

@@ -13,10 +13,10 @@ public class ConnectionDemo {
 
     public static Connection getConnection() throws InstantiationException, IllegalAccessException, InvocationTargetException, NoSuchMethodException, ClassNotFoundException, SQLException {
         Class.forName("com.mysql.cj.jdbc.Driver").getConstructor().newInstance();
-        Connection connection = DriverManager
-                .getConnection("jdbc:mysql://localhost:3306/zajecia3?serverTimezone=Europe/Warsaw",
-                        "root",
-                        "root");
+        Connection connection = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/java6?serverTimezone=Europe/Warsaw",
+                "root",
+                "1234");
         return connection;
     }
 }

@@ -8,7 +8,7 @@ public class SelectDemo {
     public static void main(String[] args) throws IllegalAccessException, InstantiationException, SQLException, NoSuchMethodException, InvocationTargetException, ClassNotFoundException {
         Connection connection = ConnectionDemo.getConnection();
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Podaj numer Id:");
+        System.out.println("Podaj literę:");
         String letter = scanner.nextLine();
         //zapytanie podatne na SQL injection
         //Statement find = connection.createStatement();

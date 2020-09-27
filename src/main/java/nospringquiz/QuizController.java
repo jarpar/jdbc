@@ -12,32 +12,30 @@ public class QuizController {
     ListIterator<Question> questions;
     Question currentQuestion;
 
-    public QuizController(QuizService quizService) {
+    public QuizController(QuizService quizService, long quizId) {
         this.quizService = quizService;
-        questions = quizService.getQuiz(1).listIterator();//todo
+        questions = quizService.getQuiz(quizId).listIterator();
     }
 
-    public Question next() {
-        if (questions.hasNext()) {
-
+    public Question next(){
+        if(questions.hasNext()){
             currentQuestion = questions.next();
         }
         return currentQuestion;
     }
-
-    public Question previous() {
-        if (questions.hasPrevious()) {
+    public Question previous(){
+        if(questions.hasPrevious()){
             currentQuestion = questions.previous();
         }
         return currentQuestion;
     }
 
-    public void saveAnswer(Question question, int answer) {
+    public void saveAnswer(Question question, int answer){
         answers.put(question, answer);
     }
 
-    public int summary() {
-        return answers.entrySet()
+    public int summary(){
+       return answers.entrySet()
                 .stream()
                 .filter(entry -> entry.getKey().getValidOption() == entry.getValue())
                 .mapToInt(entry -> entry.getKey().getPoints())

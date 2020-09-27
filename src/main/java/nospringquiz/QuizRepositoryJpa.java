@@ -1,5 +1,6 @@
 package nospringquiz;
 
+import entity.Question;
 import entity.Quiz;
 import jpa.MyPersistence;
 
@@ -8,7 +9,6 @@ import java.util.List;
 import java.util.Optional;
 
 public class QuizRepositoryJpa implements QuizRepository {
-
     private final MyPersistence persistence;
 
     public QuizRepositoryJpa(MyPersistence persistence) {
@@ -25,13 +25,11 @@ public class QuizRepositoryJpa implements QuizRepository {
     }
 
     @Override
-    public Optional<Quiz> findByID(long id) {
+    public Optional<Quiz> findById(long id) {
         EntityManager em = persistence.getEntityManager();
         em.getTransaction().begin();
         Optional<Quiz> quiz = Optional.ofNullable(em.find(Quiz.class, id));
-        quiz.ifPresent(q -> q.getQuestions());
         em.getTransaction().commit();
-        em.close();
         em.close();
         return quiz;
     }
@@ -50,7 +48,7 @@ public class QuizRepositoryJpa implements QuizRepository {
         EntityManager em = persistence.getEntityManager();
         em.getTransaction().begin();
         Quiz entity = em.find(Quiz.class, id);
-        if (entity == null) {
+        if (entity == null){
             em.getTransaction().commit();
             em.close();
             return;
@@ -64,6 +62,7 @@ public class QuizRepositoryJpa implements QuizRepository {
     @Override
     public List<Quiz> findAll() {
         EntityManager em = persistence.getEntityManager();
-        return em.createQuery("from Quiz", Quiz.class).getResultList();
+        return em.createQuery("from Quiz", Quiz.class)
+                .getResultList();
     }
 }

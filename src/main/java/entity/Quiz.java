@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -14,7 +15,6 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Quiz {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -22,6 +22,5 @@ public class Quiz {
     private String title;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private Set<Question> questions;
-
+    private Set<Question> questions = new HashSet<>();
 }
